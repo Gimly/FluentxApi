@@ -1,0 +1,29 @@
+version: '{build}'  
+pull_requests:  
+  do_not_increment_build_number: true
+branches:  
+  only:
+  - master
+nuget:  
+  disable_publish_on_pr: true
+build_script:  
+- ps: .\Build.ps1
+test: off  
+artifacts:  
+- path: .\artifacts\**\*.nupkg
+  name: NuGet
+deploy:  
+- provider: NuGet
+  server: https://www.myget.org/F/mindonsite/api/v2/package
+  api_key:
+    secure: qogXUQUxhAunkhLwUUUujCsd41cAMxwtv7tMWI4SY2TET41Z3yMzjCCmDiZknzN7
+  skip_symbols: true
+  on:
+    branch: master
+- provider: NuGet
+  name: production
+  api_key:
+    secure: xhlnPTFgZlGnqP2WH9VGk/bgI8eIsz/B2m4l6V/c5T07biiz81C1rTfiSP1XSxHX
+  on:
+    branch: master
+    appveyor_repo_tag: true
