@@ -10,7 +10,6 @@
       "version": "1.1.0"
     },
     "Mos.xApi": "0.1.0-beta",
-    "Mos.xApi.LrsClient": "0.1.0-beta",
     "Newtonsoft.Json": "9.0.1"
   },
 
