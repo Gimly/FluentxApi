@@ -1,4 +1,4 @@
-﻿namespace Mos.xApi.Data.InverseFunctionalIdentifiers
+﻿namespace Mos.xApi.InverseFunctionalIdentifiers
 {
     public interface IInverseFunctionalIdentifier
     {

@@ -1,8 +1,8 @@
-﻿using Mos.xApi.Data.InverseFunctionalIdentifiers;
+﻿using Mos.xApi.InverseFunctionalIdentifiers;
 using Newtonsoft.Json;
 using System;
 
-namespace Mos.xApi.Data.Actors
+namespace Mos.xApi.Actors
 {
     public abstract class Actor
     {

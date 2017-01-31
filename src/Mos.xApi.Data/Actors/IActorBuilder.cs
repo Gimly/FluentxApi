@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Mos.xApi.Data.Actors
+namespace Mos.xApi.Actors
 {
     public interface IActorBuilder<T> where T : Actor
     {

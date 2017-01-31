@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Mos.xApi.Data.Objects
+namespace Mos.xApi.Objects
 {
     public interface ISubStatementBuilder
     {

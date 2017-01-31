@@ -1,12 +1,13 @@
-﻿using Mos.xApi.Data.Actors;
-using Mos.xApi.Data.Objects;
-using Mos.xApi.Data.Utilities;
+﻿using Mos.xApi.Actors;
+using Mos.xApi.Builders;
+using Mos.xApi.Objects;
+using Mos.xApi.Utilities;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Mos.xApi.Data
+namespace Mos.xApi
 {
     [JsonObject(MemberSerialization.OptIn)]
     public class Statement

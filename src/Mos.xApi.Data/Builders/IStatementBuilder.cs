@@ -1,8 +1,8 @@
-﻿using Mos.xApi.Data.Actors;
+﻿using Mos.xApi.Actors;
 using System;
 using System.Collections.Generic;
 
-namespace Mos.xApi.Data
+namespace Mos.xApi.Builders
 {
     public interface IStatementBuilder
     {

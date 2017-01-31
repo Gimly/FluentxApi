@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Mos.xApi.Data.InverseFunctionalIdentifiers
+namespace Mos.xApi.InverseFunctionalIdentifiers
 {
     public class OpenId : IInverseFunctionalIdentifier
     {

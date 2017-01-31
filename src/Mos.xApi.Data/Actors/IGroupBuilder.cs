@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Mos.xApi.Data.Actors
+namespace Mos.xApi.Actors
 {
     public interface IGroupBuilder : IActorBuilder<Group>
     {

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Mos.xApi.Data.Objects.InteractionActivities
+namespace Mos.xApi.Objects.InteractionActivities
 {
     public class InteractionComponent
     {

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Mos.xApi.Data
+namespace Mos.xApi
 {
     public interface IContainsExtension<T>
     {

@@ -1,9 +1,10 @@
-﻿using Mos.xApi.Data.Objects;
+﻿using Mos.xApi.Builders;
+using Mos.xApi.Objects;
 using Newtonsoft.Json;
 using System;
 using System.Linq;
 
-namespace Mos.xApi.Data
+namespace Mos.xApi
 {
     public class Result
     {

@@ -1,8 +1,9 @@
-﻿using Newtonsoft.Json;
+﻿using Mos.xApi.Builders;
+using Newtonsoft.Json;
 using System;
 using System.Linq;
 
-namespace Mos.xApi.Data
+namespace Mos.xApi
 {
     /// <summary>
     /// A <see cref="Verb"/> defines the action between an <see cref="Actors.Actor"/> and an <see cref="Objects.Activity"/>.

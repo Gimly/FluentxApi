@@ -1,6 +1,6 @@
-﻿using Mos.xApi.Data;
-using Mos.xApi.Data.Actors;
-using Mos.xApi.Data.Objects;
+﻿using Mos.xApi;
+using Mos.xApi.Actors;
+using Mos.xApi.Objects;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;

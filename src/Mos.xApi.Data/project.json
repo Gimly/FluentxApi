@@ -1,5 +1,24 @@
 {
-  "version": "1.0.0-*",
+  "version": "0.1.0-beta-*",
+  "description": "A fluent .Net Standard library to create xApi statements and communicate with a LRS",
+  "copyright": "Copyright © Mos MindOnSite",
+
+  "packOptions": {
+    "licenseUrl": "https://github.com/MindOnSite/FluentxApi/blob/master/LICENSE.txt",
+    "repository": {
+      "type": "git",
+      "url": "https://github.com/MindOnSite/FluentxApi.git"
+    },
+    "summary": "A fluent .Net Standard library to create xApi statements and communicate with a LRS",
+    "projectUrl": "https://github.com/MindOnSite/FluentxApi/",
+    "authors": ["Xavier Hahn"],
+    "owners": [
+      "Mos MindOnSite"
+    ],
+    "tags": [
+      "xApi", "LRS", "e-learning", "elearning"
+    ]
+  },
 
   "dependencies": {
     "Microsoft.CodeAnalysis.FxCopAnalyzers": "1.1.0",

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Mos.xApi.Data.Objects
+namespace Mos.xApi.Objects
 {
     public interface IActivityBuilder : IContainsExtension<IActivityBuilder>
     {

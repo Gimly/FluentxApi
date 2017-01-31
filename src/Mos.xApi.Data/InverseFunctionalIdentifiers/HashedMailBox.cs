@@ -6,7 +6,7 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Mos.xApi.Data.InverseFunctionalIdentifiers
+namespace Mos.xApi.InverseFunctionalIdentifiers
 {
     public class HashedMailBox : IInverseFunctionalIdentifier
     {

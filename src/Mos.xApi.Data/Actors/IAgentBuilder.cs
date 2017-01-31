@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Mos.xApi.Data.Actors
+namespace Mos.xApi.Actors
 {
     public interface IAgentBuilder : IActorBuilder<Agent>
     {

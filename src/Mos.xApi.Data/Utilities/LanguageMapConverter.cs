@@ -6,7 +6,7 @@ using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
 
-namespace Mos.xApi.Data.Utilities
+namespace Mos.xApi.Utilities
 {
     public class LanguageMapConverter : JsonConverter
     {

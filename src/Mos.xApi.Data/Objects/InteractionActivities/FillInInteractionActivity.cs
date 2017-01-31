@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Mos.xApi.Data.Objects.InteractionActivities
+namespace Mos.xApi.Objects.InteractionActivities
 {
     /// <summary>
     /// <para>

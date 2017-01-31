@@ -1,4 +1,4 @@
-﻿namespace Mos.xApi.Data
+﻿namespace Mos.xApi.Builders
 {
     public interface IVerbBuilder
     {

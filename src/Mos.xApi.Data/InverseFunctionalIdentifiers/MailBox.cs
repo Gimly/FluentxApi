@@ -1,9 +1,9 @@
-﻿using Mos.xApi.Data.Utilities;
+﻿using Mos.xApi.Utilities;
 using Newtonsoft.Json;
 using System;
 using System.ComponentModel.DataAnnotations;
 
-namespace Mos.xApi.Data.InverseFunctionalIdentifiers
+namespace Mos.xApi.InverseFunctionalIdentifiers
 {
     public class MailBox : IInverseFunctionalIdentifier
     {

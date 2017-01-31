@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
 
-namespace Mos.xApi.Data.Objects.InteractionActivities
+namespace Mos.xApi.Objects.InteractionActivities
 {
     public class ChoiceInteractionActivity : IInteractionActivity<IEnumerable<string>>
     {

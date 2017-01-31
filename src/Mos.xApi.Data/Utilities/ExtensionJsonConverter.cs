@@ -3,7 +3,7 @@ using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 
-namespace Mos.xApi.Data.Utilities
+namespace Mos.xApi.Utilities
 {
     public class ExtensionJsonConverter : JsonConverter
     {

@@ -1,10 +1,10 @@
-﻿using Mos.xApi.Data.InverseFunctionalIdentifiers;
+﻿using Mos.xApi.InverseFunctionalIdentifiers;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Mos.xApi.Data.Actors
+namespace Mos.xApi.Actors
 {
     public class Group : Actor
     {

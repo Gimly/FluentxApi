@@ -5,7 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Xml;
 
-namespace Mos.xApi.Data.Utilities
+namespace Mos.xApi.Utilities
 {
     public class TimeSpanJsonConverter : JsonConverter
     {

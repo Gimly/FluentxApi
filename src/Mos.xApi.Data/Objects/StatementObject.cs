@@ -1,7 +1,8 @@
-﻿using Mos.xApi.Data.Actors;
+﻿using Mos.xApi.Actors;
+using Mos.xApi.Builders;
 using System;
 
-namespace Mos.xApi.Data.Objects
+namespace Mos.xApi.Objects
 {
     public abstract class StatementObject
     {

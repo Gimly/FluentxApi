@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Mos.xApi.Data
+namespace Mos.xApi.Builders
 {
     internal class VerbBuilder : IVerbBuilder
     {

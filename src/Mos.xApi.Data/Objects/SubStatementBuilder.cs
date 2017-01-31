@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using Mos.xApi.Data.Actors;
+using Mos.xApi.Actors;
 using System.Linq;
 
-namespace Mos.xApi.Data.Objects
+namespace Mos.xApi.Objects
 {
     internal class SubStatementBuilder : ISubStatementBuilder
     {

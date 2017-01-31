@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Mos.xApi.Data.Objects
+namespace Mos.xApi.Objects
 {
     internal class ActivityBuilder : IActivityBuilder
     {

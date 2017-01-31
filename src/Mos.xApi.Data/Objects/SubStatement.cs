@@ -1,10 +1,10 @@
-﻿using Mos.xApi.Data.Actors;
+﻿using Mos.xApi.Actors;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Mos.xApi.Data.Objects
+namespace Mos.xApi.Objects
 {
     public class SubStatement : StatementObject
     {

@@ -1,11 +1,11 @@
-﻿using Mos.xApi.Data.Actors;
-using Mos.xApi.Data.InverseFunctionalIdentifiers;
+﻿using Mos.xApi.Actors;
+using Mos.xApi.InverseFunctionalIdentifiers;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
 using System.Reflection;
 
-namespace Mos.xApi.Data.Utilities
+namespace Mos.xApi.Utilities
 {
     public class ActorJsonConverter : JsonConverter
     {

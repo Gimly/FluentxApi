@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using Mos.xApi.Data;
-using Mos.xApi.Data.Actors;
+using Mos.xApi;
+using Mos.xApi.Actors;
 
 namespace Mos.xApi.LrsClient
 {

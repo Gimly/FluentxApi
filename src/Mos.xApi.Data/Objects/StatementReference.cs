@@ -1,7 +1,7 @@
 ﻿using Newtonsoft.Json;
 using System;
 
-namespace Mos.xApi.Data.Objects
+namespace Mos.xApi.Objects
 {
     public class StatementReference : StatementObject
     {

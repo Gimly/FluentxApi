@@ -1,7 +1,7 @@
-﻿using Mos.xApi.Data.InverseFunctionalIdentifiers;
+﻿using Mos.xApi.InverseFunctionalIdentifiers;
 using Newtonsoft.Json;
 
-namespace Mos.xApi.Data.Actors
+namespace Mos.xApi.Actors
 {
     [JsonObject(MemberSerialization.OptIn)]
     public class Agent : Actor

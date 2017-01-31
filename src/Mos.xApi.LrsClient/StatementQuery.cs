@@ -1,4 +1,4 @@
-﻿using Mos.xApi.Data.Actors;
+﻿using Mos.xApi.Actors;
 using System;
 using System.Collections.Generic;
 using System.Linq;

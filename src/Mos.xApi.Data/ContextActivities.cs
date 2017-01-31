@@ -1,10 +1,10 @@
-﻿using Mos.xApi.Data.Objects;
+﻿using Mos.xApi.Objects;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Mos.xApi.Data
+namespace Mos.xApi
 {
     public class ContextActivities
     {

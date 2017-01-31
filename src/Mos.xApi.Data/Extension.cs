@@ -2,7 +2,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace Mos.xApi.Data
+namespace Mos.xApi
 {
     public class Extension : Dictionary<Uri, string>
     {

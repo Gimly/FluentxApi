@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json;
 
-namespace Mos.xApi.Data
+namespace Mos.xApi
 {
     public class Score
     {

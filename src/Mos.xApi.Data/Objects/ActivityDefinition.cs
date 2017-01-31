@@ -2,7 +2,7 @@
 using System;
 using System.Linq;
 
-namespace Mos.xApi.Data.Objects
+namespace Mos.xApi.Objects
 {
     public class ActivityDefinition
     {

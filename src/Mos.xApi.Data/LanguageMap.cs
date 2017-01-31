@@ -4,7 +4,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Mos.xApi.Data
+namespace Mos.xApi
 {
     public class LanguageMap : Dictionary<string, string>, ILanguageMap
     {

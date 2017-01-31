@@ -1,9 +1,9 @@
-﻿using Mos.xApi.Data.Actors;
-using Mos.xApi.Data.Objects;
+﻿using Mos.xApi.Actors;
+using Mos.xApi.Objects;
 using System;
 using System.Collections.Generic;
 
-namespace Mos.xApi.Data
+namespace Mos.xApi.Builders
 {
     public interface IContextBuilder : IContainsExtension<IContextBuilder>
     {
