@@ -10,7 +10,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		global.json = global.json
 	EndProjectSection
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Mos.xApi", "src\Mos.xApi.Data\Mos.xApi.xproj", "{CD621FE4-8CF8-4260-BE5A-4FE1697CC5B2}"
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Mos.xApi", "src\Mos.xApi\Mos.xApi.xproj", "{CD621FE4-8CF8-4260-BE5A-4FE1697CC5B2}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "demo", "demo", "{D831DFB1-8701-43A2-B36C-1BE9D08ED3CA}"
 EndProject
