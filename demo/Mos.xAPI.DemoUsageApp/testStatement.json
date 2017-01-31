@@ -1,0 +1,130 @@
+﻿{
+  "id": "4020459d-13c5-48ba-8fd3-5178568f362e",
+  "actor": {
+    "objectType": "Group",
+    "member": [
+      {
+        "objectType": "Agent",
+        "account": {
+          "name": "13936749",
+          "homePage": "http://www.example.com"
+        },
+        "name": "Andrew Downes"
+      },
+      {
+        "objectType": "Agent",
+        "openid": "http://toby.openid.example.org/",
+        "name": "Toby Nichols"
+      },
+      {
+        "objectType": "Agent",
+        "mbox_sha1sum": "ebd31e95054c018b10727ccffd2ef2ec3a016ee9",
+        "name": "Ena Hills"
+      }
+    ],
+    "mbox": "mailto:teampb@example.com",
+    "name": "Team PB"
+  },
+  "verb": {
+    "id": "http://adlnet.gov/expapi/verbs/attended",
+    "display": {
+      "en-GB": "attended",
+      "en-US": "attended"
+    }
+  },
+  "object": {
+    "objectType": "Activity",
+    "id": "http://www.example.com/meetings/occurances/34534",
+    "definition": {
+      "name": {
+        "en-GB": "example meeting",
+        "en-US": "example meeting"
+      },
+      "description": {
+        "en-GB": "An example meeting that happened on a specific occasion with certain people present.",
+        "en-US": "An example meeting that happened on a specific occasion with certain people present."
+      },
+      "type": "http://adlnet.gov/expapi/activities/meeting",
+      "moreInfo": "http://virtualmeeting.example.com/345256",
+      "extensions": {
+        "http://example.com/profiles/meetings/activitydefinitionextensions/room"
+: {
+          "name": "Kilby",
+          "id": "http://example.com/rooms/342"
+        }
+      }
+    }
+  },
+  "result": {
+    "success": true,
+    "completion": true,
+    "response": "We agreed on some example actions.",
+    "duration": "PT1H",
+    "extensions": {
+      "http://example.com/profiles/meetings/resultextensions/minuteslocation": "X:\\meetings\\minutes\\examplemeeting.one"
+    }
+  },
+  "context": {
+    "registration": "ec531277-b57b-4c15-8d91-d292c5b2b8f7",
+    "instructor": {
+      "objectType": "Agent",
+      "account": {
+        "name": "13936749",
+        "homePage": "http://www.example.com"
+      },
+      "name": "Andrew Downes"
+    },
+    "team": {
+      "objectType": "Group",
+      "mbox": "mailto:teampb@example.com",
+      "name": "Team PB"
+    },
+    "contextActivities": {
+      "parent": [
+        {
+          "objectType": "Activity",
+          "id": "http://www.example.com/meetings/series/267"
+        }
+      ],
+      "category": [
+        {
+          "objectType": "Activity",
+          "id": "http://www.example.com/meetings/categories/teammeeting",
+          "definition": {
+            "name": {
+              "en": "team meeting"
+            },
+            "description": {
+              "en": "A category of meeting used for regular team meetings."
+            },
+            "type": "http://example.com/expapi/activities/meetingcategory"
+          }
+        }
+      ],
+      "other": [
+        {
+          "objectType": "Activity",
+          "id": "http://www.example.com/meetings/occurances/34257"
+        },
+        {
+          "objectType": "Activity",
+          "id": "http://www.example.com/meetings/occurances/3425567"
+        }
+      ]
+    },
+    "platform": "Example virtual meeting software",
+    "language": "tlh",
+    "statement": {
+      "objectType": "StatementRef",
+      "id": "6690e6c9-3ef0-4ed3-8b37-7f3964730bee"
+    }
+  },
+  "timestamp": "2015-12-18T12:17:00",
+  "authority": {
+    "objectType": "Agent",
+    "account": {
+      "name": "anonymous",
+      "homePage": "http://cloud.scorm.com"
+    }
+  }
+}
