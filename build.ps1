@@ -7,15 +7,23 @@
     If it doesn't exist, it will call Install-Module psbuild to install it
 #>
 function Assert-PsBuildInstalled {
-    if (-not (Get-Command "Invoke-MSBuild" -ErrorAction SilentlyContinue)) {
-        Write-Verbose "Installing PsBuild"
-        Install-Module psbuild
-    } else{
-        Write-Verbose "psbuild already installed, yay!"
-    }
+    [cmdletbinding()]
+    param(
+        [string]$psbuildInstallUri = 'https://raw.githubusercontent.com/ligershark/psbuild/master/src/GetPSBuild.ps1'
+    )
+    process{
+        if(-not (Get-Command "Invoke-MsBuild" -errorAction SilentlyContinue)){
+            'Installing psbuild from [{0}]' -f $psbuildInstallUri | Write-Verbose
+            (new-object Net.WebClient).DownloadString($psbuildInstallUri) | iex
+        }
+        else{
+            'psbuild already loaded, skipping download' | Write-Verbose
+        }
 
-    if (-not (Get-Command "Invoke-MSBuild" -ErrorAction SilentlyContinue)) {
-        throw ('Something went wrong with the psbuild install.')
+        # make sure it's loaded and throw if not
+        if(-not (Get-Command "Invoke-MsBuild" -errorAction SilentlyContinue)){
+            throw ('Unable to install/load psbuild from [{0}]' -f $psbuildInstallUri)
+        }
     }
 }
 
@@ -30,8 +38,7 @@ function Assert-PsBuildInstalled {
 .EXAMPLE
   exec { svn info $repository_trunk } "Error executing SVN. Please verify SVN command-line client is installed"
 #>
-function Exec  
-{
+function Exec {
     [CmdletBinding()]
     param(
         [Parameter(Position=0,Mandatory=1)][scriptblock]$cmd,
