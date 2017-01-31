@@ -13,7 +13,7 @@ namespace Mos.xApi.LrsClient
             _statements = new List<Statement>();
         }
 
-        public IEnumerable<Statement> Statement => _statements;
+        public IEnumerable<Statement> Statements => _statements;
 
         public Uri More { get; internal set; }
 
