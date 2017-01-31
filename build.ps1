@@ -56,13 +56,17 @@ if (Test-Path .\artifacts) {
 
 Assert-PsBuildInstalled
 
+'Starting dotnet restore' | Write-Verbose
 exec {& dotnet restore .\src\Mos.xApi}
 
+'Starting MSBuild process' | Write-Verbose
 Invoke-MSBuild
 
 $revision = @{ $true = $env:APPVEYOR_BUILD_NUMBER; $false = 1 }[$env:APPVEYOR_BUILD_NUMBER -ne $NULL];
 $revision = "{0:D4}" -f [convert]::ToInt32($revision, 10)
 
+#'Running tests' | Write-Verbose
 # exec { & dotnet test .\test\Mos.xApi.Test -c Release }
 
+'Creating NuGet packages' | Write-Verbose
 exec { & dotnet pack .\src\Mos.xApi -c Release -o .\artifacts --version-suffix=$revision }
