@@ -8,8 +8,10 @@ A fluent .Net Standard library to create xApi statements and communicate with a 
 ## Installation
 Add the NuGet package to your project using the Package Manager Console.
 
+You have to add the -Pre flag because the package is still in beta.
+
 ```powershell
-PM> Install-Package Mos.xApi
+PM> Install-Package Mos.xApi -Pre
 ```
 
 ## Getting started
