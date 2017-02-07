@@ -17,7 +17,6 @@ namespace Mos.xApi.Client
     {
         private static readonly HttpClient HttpClient;
         private readonly string _statementEndPoint;
-        private readonly string _xApiVersion;
 
         static LrsClient()
         {
@@ -28,7 +27,6 @@ namespace Mos.xApi.Client
         {
             HttpClient.BaseAddress = lrsBaseUrl;
             _statementEndPoint = statementEndPoint;
-            _xApiVersion = xApiVersion;
 
             if(HttpClient.DefaultRequestHeaders.Any(x => x.Key == " X-Experience-API-Version"))
             {
