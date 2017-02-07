@@ -28,12 +28,12 @@ namespace Mos.xApi.Client
             HttpClient.BaseAddress = lrsBaseUrl;
             _statementEndPoint = statementEndPoint;
 
-            if(HttpClient.DefaultRequestHeaders.Any(x => x.Key == " X-Experience-API-Version"))
+            if(HttpClient.DefaultRequestHeaders.Any(x => x.Key == "X-Experience-API-Version"))
             {
-                HttpClient.DefaultRequestHeaders.Remove("HttpClient.DefaultRequestHeaders");
+                HttpClient.DefaultRequestHeaders.Remove("X-Experience-API-Version");
             }
 
-            HttpClient.DefaultRequestHeaders.Add("HttpClient.DefaultRequestHeaders", xApiVersion);
+            HttpClient.DefaultRequestHeaders.Add("X-Experience-API-Version", xApiVersion);
         }
 
         public void SetBasicAuthentication(string username, string password)
