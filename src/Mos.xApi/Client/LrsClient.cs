@@ -17,16 +17,25 @@ namespace Mos.xApi.Client
     {
         private static readonly HttpClient HttpClient;
         private readonly string _statementEndPoint;
+        private readonly string _xApiVersion;
 
         static LrsClient()
         {
             HttpClient = new HttpClient();
         }
 
-        public LrsClient(Uri lrsBaseUrl, string statementEndPoint = "statements")
+        public LrsClient(Uri lrsBaseUrl, string statementEndPoint = "statements", string xApiVersion = "1.0.0")
         {
             HttpClient.BaseAddress = lrsBaseUrl;
             _statementEndPoint = statementEndPoint;
+            _xApiVersion = xApiVersion;
+
+            if(HttpClient.DefaultRequestHeaders.Any(x => x.Key == " X-Experience-API-Version"))
+            {
+                HttpClient.DefaultRequestHeaders.Remove("HttpClient.DefaultRequestHeaders");
+            }
+
+            HttpClient.DefaultRequestHeaders.Add("HttpClient.DefaultRequestHeaders", xApiVersion);
         }
 
         public void SetBasicAuthentication(string username, string password)
