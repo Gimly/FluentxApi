@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 using Mos.xApi;
 using Mos.xApi.Actors;
 
-namespace Mos.xApi.LrsClient
+namespace Mos.xApi.Client
 {
     public interface ILrsClient
     {

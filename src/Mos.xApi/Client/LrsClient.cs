@@ -11,7 +11,7 @@ using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Mos.xApi.LrsClient
+namespace Mos.xApi.Client
 {
     public class LrsClient
     {
