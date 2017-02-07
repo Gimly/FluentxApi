@@ -6,7 +6,7 @@ using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Mos.xApi.LrsClient
+namespace Mos.xApi.Client
 {
     /// <summary>
     /// This class is used to define a query that allows to retrieve Statements from the Statement API of an LRS.

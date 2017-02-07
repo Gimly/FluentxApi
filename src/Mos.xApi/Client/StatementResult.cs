@@ -1,8 +1,7 @@
-﻿using Mos.xApi;
-using System;
+﻿using System;
 using System.Collections.Generic;
 
-namespace Mos.xApi.LrsClient
+namespace Mos.xApi.Client
 {
     public class StatementResult
     {
