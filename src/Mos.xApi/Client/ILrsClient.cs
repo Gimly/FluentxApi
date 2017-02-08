@@ -31,5 +31,28 @@ namespace Mos.xApi.Client
         /// <returns>The list of State ids for all state data for this context.</returns>
         Task<IEnumerable<string>> FindStateIdsAsync(Uri activityId, Agent agent, Guid? registration = null, DateTime? since = null);
 
+        /// <summary>
+        /// Stores the document specified by the given "stateId" that exists in the context of the specified Activity, Agent, 
+        /// and registration (if specified).
+        /// </summary>
+        /// <param name="activityId">The Activity id associated with this state.</param>
+        /// <param name="agent">The Agent associated with this state.</param>
+        /// <param name="stateId">The id for this state, within the given context.</param>
+        /// <param name="document">The document to be stored for this state.</param>
+        /// <param name="registration">The registration associated with this state.</param>
+        /// <returns></returns>
+        Task SaveStateAsync(Uri activityId, Agent agent, string stateId, byte[] document, Guid? registration = null);
+
+        /// <summary>
+        /// Stores the document specified by the given "stateId" that exists in the context of the specified Activity, Agent, 
+        /// and registration (if specified).
+        /// </summary>
+        /// <param name="activityId">The Activity id associated with this state.</param>
+        /// <param name="agent">The Agent associated with this state.</param>
+        /// <param name="stateId">The id for this state, within the given context.</param>
+        /// <param name="document">The document to be stored for this state.</param>
+        /// <param name="registration">The registration associated with this state.</param>
+        /// <returns></returns>
+        Task SaveStateAsync(Uri activityId, Agent agent, string stateId, string document, Guid? registration = null);
     }
 }

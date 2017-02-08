@@ -29,7 +29,7 @@ namespace Mos.xApi.Client
             HttpClient.BaseAddress = lrsBaseUrl;
             _statementEndPoint = statementEndPoint;
 
-            if(HttpClient.DefaultRequestHeaders.Any(x => x.Key == "X-Experience-API-Version"))
+            if (HttpClient.DefaultRequestHeaders.Any(x => x.Key == "X-Experience-API-Version"))
             {
                 HttpClient.DefaultRequestHeaders.Remove("X-Experience-API-Version");
             }
@@ -167,11 +167,11 @@ namespace Mos.xApi.Client
 
         public async Task VoidStatementAsync(Guid statementId, Agent agent)
         {
-            var voidingStatement = 
+            var voidingStatement =
                 Statement.Create(
-                    agent, 
+                    agent,
                     Verb.Create("http://adlnet.gov/expapi/verbs/voided")
-                        .AddDisplay("en-US", "voided"), 
+                        .AddDisplay("en-US", "voided"),
                     StatementObject.CreateStatementReference(statementId)).Build();
             await SendStatementAsync(voidingStatement);
         }
@@ -198,13 +198,34 @@ namespace Mos.xApi.Client
             var content = await response.Content.ReadAsStringAsync();
             var data = JToken.Parse(content);
 
-            if (!data.Any())
-            {
-                return new string[] { };
-            }
-
-            return new List<string>();
+            return data.Select(x => x.Value<string>()).ToArray();
         }
 
+        public async Task SaveStateAsync(Uri activityId, Agent agent, string stateId, byte[] document, Guid? registration = null)
+        {
+            var activityIdUrlEncoded = WebUtility.UrlEncode(activityId.ToString());
+            var agentUrlEncoded = WebUtility.UrlEncode(agent.ToJson());
+            var stateIdUrlEncoded = WebUtility.UrlEncode(stateId);
+
+            var stateQuery = $"activities/state?activityId={activityIdUrlEncoded}&agent={agentUrlEncoded}&stateId={stateIdUrlEncoded}";
+
+            if (registration.HasValue)
+            {
+                var registrationEncoded = WebUtility.UrlEncode(registration.Value.ToString());
+                stateQuery += $"&registration={registrationEncoded}";
+            }
+
+            using (var byteArrayContent = new ByteArrayContent(document))
+            {
+                var response = await HttpClient.PutAsync(stateQuery, byteArrayContent);
+                response.EnsureSuccessStatusCode();
+            }
+        }
+
+        public async Task SaveStateAsync(Uri activityId, Agent agent, string stateId, string document, Guid? registration = null)
+        {
+            var byteArray = Encoding.ASCII.GetBytes(document);
+            await SaveStateAsync(activityId, agent, stateId, byteArray, registration);
+        }
     }
 }

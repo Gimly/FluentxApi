@@ -1,15 +1,22 @@
 ﻿using Mos.xApi;
 using Mos.xApi.Actors;
+using Mos.xApi.Client;
 using Mos.xApi.Objects;
 using System;
+using System.Threading.Tasks;
 
 namespace Mos.xAPI.DemoUsageApp
 {
     public class Program
     {
-        public static void Main()
+        public static async Task MainAsync()
         {
             DisplayXapiSpecExampleStatements();
+        }
+
+        public static void Main()
+        {
+            MainAsync().Wait();
         }
 
         private static Statement CompleteStatement()
