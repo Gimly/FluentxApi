@@ -6,6 +6,7 @@ using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
@@ -13,7 +14,7 @@ using System.Threading.Tasks;
 
 namespace Mos.xApi.Client
 {
-    public class LrsClient
+    public class LrsClient : ILrsClient
     {
         private static readonly HttpClient HttpClient;
         private readonly string _statementEndPoint;
@@ -56,7 +57,7 @@ namespace Mos.xApi.Client
             {
                 if (!response.IsSuccessStatusCode)
                 {
-                    if (response.StatusCode == System.Net.HttpStatusCode.NotFound)
+                    if (response.StatusCode == HttpStatusCode.NotFound)
                     {
                         return null;
                     }
@@ -174,5 +175,36 @@ namespace Mos.xApi.Client
                     StatementObject.CreateStatementReference(statementId)).Build();
             await SendStatementAsync(voidingStatement);
         }
+
+        public async Task<IEnumerable<string>> FindStateIdsAsync(Uri activityId, Agent agent, Guid? registration = default(Guid?), DateTime? since = default(DateTime?))
+        {
+            var activityUrlEncoded = WebUtility.UrlEncode(activityId.ToString());
+            var agentUrlEncoded = WebUtility.UrlEncode(agent.ToJson());
+
+            var stateQuery = $"activities/state?activityId={activityUrlEncoded}&agent={agentUrlEncoded}";
+            if (registration.HasValue)
+            {
+                var registrationEncoded = WebUtility.UrlEncode(registration.Value.ToString());
+                stateQuery += $"&registration={registrationEncoded}";
+            }
+            if (since.HasValue)
+            {
+                var sinceEncoded = WebUtility.UrlEncode(since.Value.ToString("o"));
+                stateQuery += $"&since={sinceEncoded}";
+            }
+
+            var response = await HttpClient.GetAsync(stateQuery);
+
+            var content = await response.Content.ReadAsStringAsync();
+            var data = JToken.Parse(content);
+
+            if (!data.Any())
+            {
+                return new string[] { };
+            }
+
+            return new List<string>();
+        }
+
     }
 }
