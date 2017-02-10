@@ -1,6 +1,7 @@
 {
   "title": "Fluent xApi",
   "version": "0.3.0-beta-*",
+  "authors": [ "MindOnSite", "Xavier Hahn" ],
   "description": "A fluent .Net Standard library to create xApi statements and communicate with a LRS",
   "copyright": "Copyright © Mos MindOnSite",
 
@@ -12,12 +13,15 @@
     },
     "summary": "A fluent .Net Standard library to create xApi statements and communicate with a LRS",
     "projectUrl": "https://github.com/MindOnSite/FluentxApi/",
-    "authors": ["Xavier Hahn"],
+    "authors": [ "Xavier Hahn" ],
     "owners": [
       "Mos MindOnSite"
     ],
     "tags": [
-      "xApi", "LRS", "e-learning", "elearning"
+      "xApi",
+      "LRS",
+      "e-learning",
+      "elearning"
     ]
   },
 
