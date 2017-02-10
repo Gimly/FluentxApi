@@ -1,6 +1,6 @@
 {
   "title": "Fluent xApi",
-  "version": "0.2.1-beta-*",
+  "version": "0.3.0-beta-*",
   "description": "A fluent .Net Standard library to create xApi statements and communicate with a LRS",
   "copyright": "Copyright © Mos MindOnSite",
 
