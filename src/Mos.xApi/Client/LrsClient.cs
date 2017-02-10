@@ -234,7 +234,7 @@ namespace Mos.xApi.Client
             await SaveStateAsync(stateId, activityId, agent, byteArray, registration);
         }
 
-        public async Task<State> GetStateAsync(string stateId, Uri activityId, Agent agent, Guid? registration = default(Guid?))
+        public async Task<State> GetStateAsync(string stateId, Uri activityId, Agent agent, Guid? registration = null)
         {
             var stateQuery = CreateStateQuery(stateId, activityId, agent, registration);
 
@@ -246,6 +246,14 @@ namespace Mos.xApi.Client
             var content = await response.Content.ReadAsByteArrayAsync();
 
             return new State(stateId, updated, agent, registration, content);
+        }
+
+        public async Task DeleteStateAsync(string stateId, Uri activityId, Agent agent, Guid? registration = null)
+        {
+            var stateQuery = CreateStateQuery(stateId, activityId, agent, registration);
+
+            var response = await HttpClient.DeleteAsync(stateQuery);
+            response.EnsureSuccessStatusCode();
         }
     }
 }

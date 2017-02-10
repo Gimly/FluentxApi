@@ -39,7 +39,6 @@ namespace Mos.xApi.Client
         /// <param name="agent">The Agent associated with this state.</param>
         /// <param name="document">The document to be stored for this state.</param>
         /// <param name="registration">The registration associated with this state.</param>
-        /// <returns></returns>
         Task SaveStateAsync(string stateId, Uri activityId, Agent agent, byte[] document, Guid? registration = null);
 
         /// <summary>
@@ -51,7 +50,6 @@ namespace Mos.xApi.Client
         /// <param name="agent">The Agent associated with this state.</param>
         /// <param name="document">The document to be stored for this state.</param>
         /// <param name="registration">The registration associated with this state.</param>
-        /// <returns></returns>
         Task SaveStateAsync(string stateId, Uri activityId, Agent agent, string document, Guid? registration = null);
 
         /// <summary>
@@ -62,7 +60,17 @@ namespace Mos.xApi.Client
         /// <param name="activityId">The Activity id associated with this state.</param>
         /// <param name="agent">The Agent associated with this state.</param>
         /// <param name="registration">The registration associated with this state.</param>
-        /// <returns></returns>
+        /// <returns>The state retrieved from the LRS</returns>
         Task<State> GetStateAsync(string stateId, Uri activityId, Agent agent, Guid? registration = null);
+
+        /// <summary>
+        /// Deletes the document specified by the given "stateId" that exists in the context of the specified Activity, Agent, 
+        /// and registration (if specified).
+        /// </summary>
+        /// <param name="stateId">The id for this state, within the given context.</param>
+        /// <param name="activityId">The Activity id associated with this state.</param>
+        /// <param name="agent">The Agent associated with this state.</param>
+        /// <param name="registration">The registration associated with this state.</param>
+        Task DeleteStateAsync(string stateId, Uri activityId, Agent agent, Guid? registration = null);
     }
 }
