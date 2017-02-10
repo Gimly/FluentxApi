@@ -7,13 +7,64 @@ namespace Mos.xApi.Client
 {
     public interface ILrsClient
     {
-        Task<StatementResult> FindMoreStatements(Uri moreStatementsUri);
+        /// <summary>
+        /// Retrieves more statements from the same query that returned the given
+        /// more statement Uri.
+        /// </summary>
+        /// <param name="moreStatementsUri">The URI returned by the LRS to retrieve more statements for the same query.</param>
+        /// <returns>The resulting statements.</returns>
+        Task<StatementResult> FindMoreStatementsAsync(Uri moreStatementsUri);
+
+        /// <summary>
+        /// Fetches all the statements corresponsing to the specified query.
+        /// </summary>
+        /// <param name="query">The query defining the statements to retrieve</param>
+        /// <returns>The list of all statements corresponding to the query.</returns>
         Task<StatementResult> FindStatementsAsync(StatementQuery query);
+
+        /// <summary>
+        /// Returns the statement identified by the statement id passed in parameter.
+        /// If there is no statement linked to that identifier, the method will return null.
+        /// </summary>
+        /// <param name="statementId">A unique identifier linked to the statement to retrieve</param>
+        /// <returns>The statement linked to the passed identifier if found, otherwise null</returns>
         Task<Statement> GetStatementAsync(Guid statementId);
+        
+        /// <summary>
+        /// Returns the voided statement identified by the statement id passed in parameter. If there is no voided statement linked
+        /// to that identifier, the method will return null.
+        /// </summary>
+        /// <param name="statementId">A unique identifier linked to the voided statement to retrieve</param>
+        /// <returns>The voided statement linked to the passed identifier if found, otherwise null</returns>
         Task<Statement> GetVoidedStatementAsync(Guid statementId);
+
+        /// <summary>
+        /// Stores a statement to the LRS
+        /// </summary>
+        /// <param name="statement">The statement to store</param>
         Task SendStatementAsync(Statement statement);
+
+        /// <summary>
+        /// Stores a list of statements to the LRS
+        /// </summary>
+        /// <param name="statements">The list of statements to store</param>
         Task SendStatementAsync(IEnumerable<Statement> statements);
+
+        /// <summary>
+        /// Configures the LRS client to use basic authentication using the passed username and password.
+        /// <para>
+        /// Both information will be encoded to base 64 and added to the authentication HTTP header.
+        /// </para>
+        /// </summary>
+        /// <param name="username">The username</param>
+        /// <param name="password">The password</param>
         void SetBasicAuthentication(string username, string password);
+
+        /// <summary>
+        /// Voids a statement by sending a statement containing the void verb.
+        /// </summary>
+        /// <param name="statementId">The id of the statement to void</param>
+        /// <param name="agent">The agent that voids the statement</param>
         Task VoidStatementAsync(Guid statementId, Agent agent);
 
         /// <summary>

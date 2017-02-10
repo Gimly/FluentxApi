@@ -36,6 +36,14 @@ namespace Mos.xApi.Client
             HttpClient.DefaultRequestHeaders.Add("X-Experience-API-Version", xApiVersion);
         }
 
+        /// <summary>
+        /// Configures the LRS client to use basic authentication using the passed username and password.
+        /// <para>
+        /// Both information will be encoded to base 64 and added to the authentication HTTP header.
+        /// </para>
+        /// </summary>
+        /// <param name="username">The username</param>
+        /// <param name="password">The password</param>
         public void SetBasicAuthentication(string username, string password)
         {
             HttpClient.DefaultRequestHeaders.Authorization =
@@ -69,7 +77,13 @@ namespace Mos.xApi.Client
             }
         }
 
-        public async Task<StatementResult> FindMoreStatements(Uri moreStatementsUri)
+        /// <summary>
+        /// Retrieves more statements from the same query that returned the given
+        /// more statement Uri.
+        /// </summary>
+        /// <param name="moreStatementsUri">The URI returned by the LRS to retrieve more statements for the same query.</param>
+        /// <returns>The resulting statements.</returns>
+        public async Task<StatementResult> FindMoreStatementsAsync(Uri moreStatementsUri)
         {
             using (var response = await HttpClient.GetAsync(moreStatementsUri))
             {
@@ -102,6 +116,11 @@ namespace Mos.xApi.Client
             }
         }
 
+        /// <summary>
+        /// Fetches all the statements corresponsing to the specified query.
+        /// </summary>
+        /// <param name="query">The query defining the statements to retrieve</param>
+        /// <returns>The list of all statements corresponding to the query.</returns>
         public async Task<StatementResult> FindStatementsAsync(StatementQuery query)
         {
             using (var response = await HttpClient.GetAsync($"{_statementEndPoint}{query.ToQueryString()}"))
@@ -110,30 +129,10 @@ namespace Mos.xApi.Client
             }
         }
 
-        private async Task<StatementResult> ParseStatementResultAsync(HttpResponseMessage response)
-        {
-            var data = await response.Content.ReadAsStringAsync();
-            var result = JObject.Parse(data);
-
-            var statementResult = new StatementResult();
-
-            var statementsJson = result["statements"];
-            if (statementsJson != null)
-            {
-                foreach (var statement in statementsJson)
-                {
-                    statementResult.AddStatement(Statement.FromJson(statement.ToString()));
-                }
-            }
-
-            if (result["more"] != null)
-            {
-                statementResult.More = new Uri(result["more"].Value<string>());
-            }
-
-            return statementResult;
-        }
-
+        /// <summary>
+        /// Stores a statement to the LRS
+        /// </summary>
+        /// <param name="statement">The statement to store</param>
         public async Task SendStatementAsync(Statement statement)
         {
             using (var content = new StringContent(statement.ToJson(), Encoding.UTF8, "application/json"))
@@ -149,6 +148,10 @@ namespace Mos.xApi.Client
             }
         }
 
+        /// <summary>
+        /// Stores a list of statements to the LRS
+        /// </summary>
+        /// <param name="statements">The list of statements to store</param>
         public async Task SendStatementAsync(IEnumerable<Statement> statements)
         {
             using (var content = new StringContent(JsonConvert.SerializeObject(statements.ToList(), JsonSerializerSettingsFactory.CreateSettings()), Encoding.UTF8, "application/json"))
@@ -163,7 +166,12 @@ namespace Mos.xApi.Client
                 }
             }
         }
-
+        
+        /// <summary>
+        /// Voids a statement by sending a statement containing the void verb.
+        /// </summary>
+        /// <param name="statementId">The id of the statement to void</param>
+        /// <param name="agent">The agent that voids the statement</param>
         public async Task VoidStatementAsync(Guid statementId, Agent agent)
         {
             var voidingStatement =
@@ -175,6 +183,18 @@ namespace Mos.xApi.Client
             await SendStatementAsync(voidingStatement);
         }
 
+        /// <summary>
+        /// Fetches State ids of all state data for this context (Activity + Agent (+ registration if specified).
+        /// <para>
+        /// If since parameter is specified, this is limited to entries that have been stored or updated since the
+        /// specified timestamp (exclusive).
+        /// </para>
+        /// </summary>
+        /// <param name="activityId">The Activity id associated with these states.</param>
+        /// <param name="agent">The Agent associated with these states.</param>
+        /// <param name="registration">The Registration associated with these states.</param>
+        /// <param name="since">Only ids of states stored since the specified DateTime (exclusive) are returned.</param>
+        /// <returns>The list of State ids for all state data for this context.</returns>
         public async Task<IEnumerable<string>> FindStateIdsAsync(Uri activityId, Agent agent, Guid? registration = default(Guid?), DateTime? since = default(DateTime?))
         {
             var activityUrlEncoded = WebUtility.UrlEncode(activityId.ToString());
@@ -200,6 +220,15 @@ namespace Mos.xApi.Client
             return data.Select(x => x.Value<string>()).ToArray();
         }
 
+        /// <summary>
+        /// Stores the document specified by the given "stateId" that exists in the context of the specified Activity, Agent, 
+        /// and registration (if specified).
+        /// </summary>
+        /// <param name="stateId">The id for this state, within the given context.</param>
+        /// <param name="activityId">The Activity id associated with this state.</param>
+        /// <param name="agent">The Agent associated with this state.</param>
+        /// <param name="document">The document to be stored for this state.</param>
+        /// <param name="registration">The registration associated with this state.</param>
         public async Task SaveStateAsync(string stateId, Uri activityId, Agent agent, byte[] document, Guid? registration = null)
         {
             var stateQuery = CreateStateQuery(stateId, activityId, agent, registration);
@@ -209,6 +238,84 @@ namespace Mos.xApi.Client
                 var response = await HttpClient.PutAsync(stateQuery, byteArrayContent);
                 response.EnsureSuccessStatusCode();
             }
+        }
+
+        /// <summary>
+        /// Stores the document specified by the given "stateId" that exists in the context of the specified Activity, Agent, 
+        /// and registration (if specified). The document is stored in ASCII.
+        /// </summary>
+        /// <param name="stateId">The id for this state, within the given context.</param>
+        /// <param name="activityId">The Activity id associated with this state.</param>
+        /// <param name="agent">The Agent associated with this state.</param>
+        /// <param name="document">The document to be stored for this state.</param>
+        /// <param name="registration">The registration associated with this state.</param>
+        public async Task SaveStateAsync(string stateId, Uri activityId, Agent agent, string document, Guid? registration = null)
+        {
+            var byteArray = Encoding.ASCII.GetBytes(document);
+            await SaveStateAsync(stateId, activityId, agent, byteArray, registration);
+        }
+
+        /// <summary>
+        /// Fetches the document specified by the given "stateId" that exists in the context of the specified Activity,
+        /// Agent and registration (if specified).
+        /// </summary>
+        /// <param name="stateId">The id for this state, within the given context.</param>
+        /// <param name="activityId">The Activity id associated with this state.</param>
+        /// <param name="agent">The Agent associated with this state.</param>
+        /// <param name="registration">The registration associated with this state.</param>
+        /// <returns>The state retrieved from the LRS</returns>
+        public async Task<State> GetStateAsync(string stateId, Uri activityId, Agent agent, Guid? registration = null)
+        {
+            var stateQuery = CreateStateQuery(stateId, activityId, agent, registration);
+
+            var response = await HttpClient.GetAsync(stateQuery);
+            response.EnsureSuccessStatusCode();
+
+            var updated = DateTime.Parse(response.Content.Headers.GetValues("Last-Modified").Single());
+
+            var content = await response.Content.ReadAsByteArrayAsync();
+
+            return new State(stateId, updated, agent, registration, content);
+        }
+
+        /// <summary>
+        /// Deletes the document specified by the given "stateId" that exists in the context of the specified Activity, Agent, 
+        /// and registration (if specified).
+        /// </summary>
+        /// <param name="stateId">The id for this state, within the given context.</param>
+        /// <param name="activityId">The Activity id associated with this state.</param>
+        /// <param name="agent">The Agent associated with this state.</param>
+        /// <param name="registration">The registration associated with this state.</param>
+        public async Task DeleteStateAsync(string stateId, Uri activityId, Agent agent, Guid? registration = null)
+        {
+            var stateQuery = CreateStateQuery(stateId, activityId, agent, registration);
+
+            var response = await HttpClient.DeleteAsync(stateQuery);
+            response.EnsureSuccessStatusCode();
+        }
+        
+        private async Task<StatementResult> ParseStatementResultAsync(HttpResponseMessage response)
+        {
+            var data = await response.Content.ReadAsStringAsync();
+            var result = JObject.Parse(data);
+
+            var statementResult = new StatementResult();
+
+            var statementsJson = result["statements"];
+            if (statementsJson != null)
+            {
+                foreach (var statement in statementsJson)
+                {
+                    statementResult.AddStatement(Statement.FromJson(statement.ToString()));
+                }
+            }
+
+            if (result["more"] != null)
+            {
+                statementResult.More = new Uri(result["more"].Value<string>());
+            }
+
+            return statementResult;
         }
 
         private static string CreateStateQuery(string stateId, Uri activityId, Agent agent, Guid? registration)
@@ -226,34 +333,6 @@ namespace Mos.xApi.Client
             }
 
             return stateQuery;
-        }
-
-        public async Task SaveStateAsync(string stateId, Uri activityId, Agent agent, string document, Guid? registration = null)
-        {
-            var byteArray = Encoding.ASCII.GetBytes(document);
-            await SaveStateAsync(stateId, activityId, agent, byteArray, registration);
-        }
-
-        public async Task<State> GetStateAsync(string stateId, Uri activityId, Agent agent, Guid? registration = null)
-        {
-            var stateQuery = CreateStateQuery(stateId, activityId, agent, registration);
-
-            var response = await HttpClient.GetAsync(stateQuery);
-            response.EnsureSuccessStatusCode();
-
-            var updated = DateTime.Parse(response.Content.Headers.GetValues("Last-Modified").Single());
-
-            var content = await response.Content.ReadAsByteArrayAsync();
-
-            return new State(stateId, updated, agent, registration, content);
-        }
-
-        public async Task DeleteStateAsync(string stateId, Uri activityId, Agent agent, Guid? registration = null)
-        {
-            var stateQuery = CreateStateQuery(stateId, activityId, agent, registration);
-
-            var response = await HttpClient.DeleteAsync(stateQuery);
-            response.EnsureSuccessStatusCode();
         }
     }
 }
