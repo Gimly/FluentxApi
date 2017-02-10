@@ -1,5 +1,4 @@
-﻿using Mos.xApi;
-using Mos.xApi.Actors;
+﻿using Mos.xApi.Actors;
 using Mos.xApi.Objects;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
@@ -201,7 +200,18 @@ namespace Mos.xApi.Client
             return data.Select(x => x.Value<string>()).ToArray();
         }
 
-        public async Task SaveStateAsync(Uri activityId, Agent agent, string stateId, byte[] document, Guid? registration = null)
+        public async Task SaveStateAsync(string stateId, Uri activityId, Agent agent, byte[] document, Guid? registration = null)
+        {
+            var stateQuery = CreateStateQuery(stateId, activityId, agent, registration);
+
+            using (var byteArrayContent = new ByteArrayContent(document))
+            {
+                var response = await HttpClient.PutAsync(stateQuery, byteArrayContent);
+                response.EnsureSuccessStatusCode();
+            }
+        }
+
+        private static string CreateStateQuery(string stateId, Uri activityId, Agent agent, Guid? registration)
         {
             var activityIdUrlEncoded = WebUtility.UrlEncode(activityId.ToString());
             var agentUrlEncoded = WebUtility.UrlEncode(agent.ToJson());
@@ -215,17 +225,27 @@ namespace Mos.xApi.Client
                 stateQuery += $"&registration={registrationEncoded}";
             }
 
-            using (var byteArrayContent = new ByteArrayContent(document))
-            {
-                var response = await HttpClient.PutAsync(stateQuery, byteArrayContent);
-                response.EnsureSuccessStatusCode();
-            }
+            return stateQuery;
         }
 
-        public async Task SaveStateAsync(Uri activityId, Agent agent, string stateId, string document, Guid? registration = null)
+        public async Task SaveStateAsync(string stateId, Uri activityId, Agent agent, string document, Guid? registration = null)
         {
             var byteArray = Encoding.ASCII.GetBytes(document);
-            await SaveStateAsync(activityId, agent, stateId, byteArray, registration);
+            await SaveStateAsync(stateId, activityId, agent, byteArray, registration);
+        }
+
+        public async Task<State> GetStateAsync(string stateId, Uri activityId, Agent agent, Guid? registration = default(Guid?))
+        {
+            var stateQuery = CreateStateQuery(stateId, activityId, agent, registration);
+
+            var response = await HttpClient.GetAsync(stateQuery);
+            response.EnsureSuccessStatusCode();
+
+            var updated = DateTime.Parse(response.Content.Headers.GetValues("Last-Modified").Single());
+
+            var content = await response.Content.ReadAsByteArrayAsync();
+
+            return new State(stateId, updated, agent, registration, content);
         }
     }
 }
