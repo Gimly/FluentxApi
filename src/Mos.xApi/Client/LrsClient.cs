@@ -166,7 +166,7 @@ namespace Mos.xApi.Client
                 }
             }
         }
-        
+
         /// <summary>
         /// Voids a statement by sending a statement containing the void verb.
         /// </summary>
@@ -228,13 +228,15 @@ namespace Mos.xApi.Client
         /// <param name="activityId">The Activity id associated with this state.</param>
         /// <param name="agent">The Agent associated with this state.</param>
         /// <param name="document">The document to be stored for this state.</param>
+        /// <param name="contentType">The content type that defines the type of the passed document</param>
         /// <param name="registration">The registration associated with this state.</param>
-        public async Task SaveStateAsync(string stateId, Uri activityId, Agent agent, byte[] document, Guid? registration = null)
+        public async Task SaveStateAsync(string stateId, Uri activityId, Agent agent, byte[] document, string contentType, Guid? registration = null)
         {
             var stateQuery = CreateStateQuery(stateId, activityId, agent, registration);
 
             using (var byteArrayContent = new ByteArrayContent(document))
             {
+                byteArrayContent.Headers.Add("Content-Type", contentType);
                 var response = await HttpClient.PutAsync(stateQuery, byteArrayContent);
                 response.EnsureSuccessStatusCode();
             }
@@ -248,11 +250,12 @@ namespace Mos.xApi.Client
         /// <param name="activityId">The Activity id associated with this state.</param>
         /// <param name="agent">The Agent associated with this state.</param>
         /// <param name="document">The document to be stored for this state.</param>
+        /// <param name="contentType">The content type that defines the type of the passed document</param>
         /// <param name="registration">The registration associated with this state.</param>
-        public async Task SaveStateAsync(string stateId, Uri activityId, Agent agent, string document, Guid? registration = null)
+        public async Task SaveStateAsync(string stateId, Uri activityId, Agent agent, string document, string contentType, Guid? registration = null)
         {
             var byteArray = Encoding.ASCII.GetBytes(document);
-            await SaveStateAsync(stateId, activityId, agent, byteArray, registration);
+            await SaveStateAsync(stateId, activityId, agent, byteArray, contentType, registration);
         }
 
         /// <summary>
@@ -293,7 +296,7 @@ namespace Mos.xApi.Client
             var response = await HttpClient.DeleteAsync(stateQuery);
             response.EnsureSuccessStatusCode();
         }
-        
+
         private async Task<StatementResult> ParseStatementResultAsync(HttpResponseMessage response)
         {
             var data = await response.Content.ReadAsStringAsync();

@@ -29,7 +29,7 @@ namespace Mos.xApi.Client
         /// <param name="statementId">A unique identifier linked to the statement to retrieve</param>
         /// <returns>The statement linked to the passed identifier if found, otherwise null</returns>
         Task<Statement> GetStatementAsync(Guid statementId);
-        
+
         /// <summary>
         /// Returns the voided statement identified by the statement id passed in parameter. If there is no voided statement linked
         /// to that identifier, the method will return null.
@@ -89,8 +89,9 @@ namespace Mos.xApi.Client
         /// <param name="activityId">The Activity id associated with this state.</param>
         /// <param name="agent">The Agent associated with this state.</param>
         /// <param name="document">The document to be stored for this state.</param>
+        /// <param name="contentType">The content type that defines the type of the passed document</param>
         /// <param name="registration">The registration associated with this state.</param>
-        Task SaveStateAsync(string stateId, Uri activityId, Agent agent, byte[] document, Guid? registration = null);
+        Task SaveStateAsync(string stateId, Uri activityId, Agent agent, byte[] document, string contentType, Guid? registration = null);
 
         /// <summary>
         /// Stores the document specified by the given "stateId" that exists in the context of the specified Activity, Agent, 
@@ -100,8 +101,9 @@ namespace Mos.xApi.Client
         /// <param name="activityId">The Activity id associated with this state.</param>
         /// <param name="agent">The Agent associated with this state.</param>
         /// <param name="document">The document to be stored for this state.</param>
+        /// <param name="contentType">The content type that defines the type of the passed document</param>
         /// <param name="registration">The registration associated with this state.</param>
-        Task SaveStateAsync(string stateId, Uri activityId, Agent agent, string document, Guid? registration = null);
+        Task SaveStateAsync(string stateId, Uri activityId, Agent agent, string document, string contentType, Guid? registration = null);
 
         /// <summary>
         /// Fetches the document specified by the given "stateId" that exists in the context of the specified Activity,
