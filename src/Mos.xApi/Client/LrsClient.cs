@@ -278,7 +278,7 @@ namespace Mos.xApi.Client
 
             var content = await response.Content.ReadAsByteArrayAsync();
 
-            return new State(stateId, updated, agent, registration, content);
+            return new State(stateId, activityId, updated, agent, registration, content);
         }
 
         /// <summary>
