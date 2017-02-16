@@ -10,6 +10,9 @@ namespace Mos.xApi
     /// </summary>
     public class Verb
     {
+        /// <summary>
+        /// Private constructor is used Json.Net when deserializing.
+        /// </summary>
         private Verb()
         {
 
@@ -55,11 +58,20 @@ namespace Mos.xApi
         [JsonProperty("display", Order = 1, NullValueHandling = NullValueHandling.Ignore)]
         public ILanguageMap Display { get; private set; }
 
+        /// <summary>
+        /// Starts creating a new Verb with an IRI as an identifier.
+        /// </summary>
+        /// <param name="idUri">Corresponds to a Verb definition. Each Verb definition corresponds to the meaning of a Verb, not the word.</param>
+        /// <returns>A builder that helps creating the rest of the Verb's properties.</returns>
         public static IVerbBuilder Create(string idUri)
         {
             return new VerbBuilder(idUri);
         }
-
+        /// <summary>
+        /// Starts creating a new Verb with an IRI as an identifier.
+        /// </summary>
+        /// <param name="id">Corresponds to a Verb definition. Each Verb definition corresponds to the meaning of a Verb, not the word.</param>
+        /// <returns>A builder that helps creating the rest of the Verb's properties.</returns>
         public static IVerbBuilder Create(Uri id)
         {
             return new VerbBuilder(id);
