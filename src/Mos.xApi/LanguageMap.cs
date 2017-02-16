@@ -14,10 +14,10 @@ namespace Mos.xApi
         public LanguageMap() { }
 
         /// <summary>
-        /// Initializes a new instance of the LanguageMap disctionary that contains 
+        /// Initializes a new instance of the LanguageMap dictionary that contains 
         /// elements that are copied from the passed dictionary.
         /// </summary>
-        /// <param name="dictionary"></param>
+        /// <param name="dictionary">The dictionary who's values are copied to the LanguageMap</param>
         public LanguageMap(IDictionary<string, string> dictionary) : base(dictionary) { }
 
         /// <summary>
