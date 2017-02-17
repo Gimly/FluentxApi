@@ -75,11 +75,11 @@ namespace Mos.xApi.Objects
         /// <summary>
         /// Adds a list of attachments to the SubStatement
         /// </summary>
-        /// <param name="attachment">The list of attachments to be added</param>
+        /// <param name="attachments">The list of attachments to be added</param>
         /// <returns>The substatement builder, to continue the fluent configuration.</returns>
-        public ISubStatementBuilder AddAttachments(IEnumerable<Attachment> attachment)
+        public ISubStatementBuilder AddAttachments(IEnumerable<Attachment> attachments)
         {
-            _attachments.AddRange(attachment);
+            _attachments.AddRange(attachments);
             return this;
         }
 
