@@ -7,15 +7,37 @@ using System.Reflection;
 
 namespace Mos.xApi.Utilities
 {
-    public class ActorJsonConverter : JsonConverter
+    /// <summary>
+    /// Json converter that allows the conversion of an Actor to its JSON representation
+    /// as defined in the Experience API specification.
+    /// </summary>
+    internal class ActorJsonConverter : JsonConverter
     {
+        /// <summary>
+        /// Checks whether the type can be converted by this converter. Type should be derived from Actor.
+        /// </summary>
+        /// <param name="objectType">The type of object trying to be converted.</param>
+        /// <returns>True if the converter can convert the type, otherwise false.</returns>
         public override bool CanConvert(Type objectType)
         {
             return typeof(Actor).IsAssignableFrom(objectType);
         }
 
+        /// <summary>
+        /// Gets a value indicating whether this JsonConverter can read JSON.
+        /// </summary>
         public override bool CanRead => true;
 
+        /// <summary>
+        /// Reads the JSON representation of the object. The tricky part here is that
+        /// the type can be either Agent or Group and that they contain vastly different
+        /// properties in each of the different definition of an Agent.
+        /// </summary>
+        /// <param name="reader">The JsonReader to read from.</param>
+        /// <param name="objectType">Type of the object.</param>
+        /// <param name="existingValue">The existing value of object being read.</param>
+        /// <param name="serializer">The calling serializer.</param>
+        /// <returns>The object value.</returns>
         public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
         {
             var item = JObject.Load(reader);
@@ -35,6 +57,11 @@ namespace Mos.xApi.Utilities
             throw new InvalidOperationException($"Cannot parse Actor, unrecognized objectType.\r\n{item.ToString()}");
         }
 
+        /// <summary>
+        /// Parses all the different types of Agent (mbox, mbos-sha1, openid, account)
+        /// </summary>
+        /// <param name="item">The Json object read from the source</param>
+        /// <returns>The parsed representation of the Agent</returns>
         private Agent ParseAgent(JToken item)
         {
             var builder = Actor.CreateAgent(item["name"]?.Value<string>());
@@ -62,6 +89,12 @@ namespace Mos.xApi.Utilities
             throw new NotSupportedException($"Cannot deserialize Actor, missing Inverse Functional Identifier. {item}");
         }
 
+        /// <summary>
+        /// Parses the group, same issue as with the Agent, but can also contain
+        /// a list of Agents.
+        /// </summary>
+        /// <param name="item">The Json object read from the source</param>
+        /// <returns>The parsed representation of the Group</returns>
         private Group ParseGroup(JToken item)
         {
             var builder = Actor.CreateGroup(item["name"]?.Value<string>());
@@ -99,6 +132,18 @@ namespace Mos.xApi.Utilities
             return builder.AsAnonymous();
         }
 
+        /// <summary>
+        /// Writes the JSON representation of the object. Here the difficulty
+        /// is with the identifier. Since there are different kind of IFI, I
+        /// decided to define them as different objects to have the object
+        /// representation cleaner. This means that JSON.Net would like
+        /// to put them under a property in the JSON, which is not how
+        /// it has been defined by the xApi specs. Therefore the use of this
+        /// converter is needed.
+        /// </summary>
+        /// <param name="writer">The JsonWriter to write to.</param>
+        /// <param name="value">The value.</param>
+        /// <param name="serializer">The calling serializer.</param>
         public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
         {
             var jo = new JObject();
@@ -136,6 +181,15 @@ namespace Mos.xApi.Utilities
             jo.WriteTo(writer);
         }
 
+        /// <summary>
+        /// Checks if the read property has a JsonConverterAttribute and uses it
+        /// if it does. Otherwise calls the standard serializer.
+        /// </summary>
+        /// <param name="jo">The Json object to parse.</param>
+        /// <param name="prop">The property info where to the object will be saved.</param>
+        /// <param name="serializer">The serializer used to serialize.</param>
+        /// <param name="propertyValue">The value of the property</param>
+        /// <param name="propertyName">The name of the property.</param>
         private static void AddPropertyToObject(JObject jo, PropertyInfo prop, JsonSerializer serializer, object propertyValue, string propertyName = null)
         {
             var jsonConvertAttribute = prop.GetCustomAttribute<JsonConverterAttribute>(true);
