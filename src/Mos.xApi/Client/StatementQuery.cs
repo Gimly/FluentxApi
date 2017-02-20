@@ -79,6 +79,10 @@ namespace Mos.xApi.Client
         /// </summary>
         public DateTime? Since { get; set; }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         internal string ToQueryString()
         {
             var dictionary = new Dictionary<string, string>();

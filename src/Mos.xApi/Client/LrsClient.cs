@@ -13,16 +13,36 @@ using System.Threading.Tasks;
 
 namespace Mos.xApi.Client
 {
+    /// <summary>
+    /// Implementation of a LRS client that can connect to a remote
+    /// LRS and send or query Statements.
+    /// </summary>
     public class LrsClient : ILrsClient
     {
+        /// <summary>
+        /// Singleton instanciated HttpClient
+        /// </summary>
         private static readonly HttpClient HttpClient;
+
+        /// <summary>
+        /// The endpoint (URL) for the statement API endpoint.
+        /// </summary>
         private readonly string _statementEndPoint;
 
+        /// <summary>
+        /// Static initializer, instanciates the HttpClient.
+        /// </summary>
         static LrsClient()
         {
             HttpClient = new HttpClient();
         }
 
+        /// <summary>
+        /// Initializes a new instance of the LrsClient.
+        /// </summary>
+        /// <param name="lrsBaseUrl">The base URL for the LRS server.</param>
+        /// <param name="statementEndPoint">The endpoint of the statements API.</param>
+        /// <param name="xApiVersion">The version of xApi used.</param>
         public LrsClient(Uri lrsBaseUrl, string statementEndPoint = "statements", string xApiVersion = "1.0.0")
         {
             HttpClient.BaseAddress = lrsBaseUrl;
@@ -297,6 +317,11 @@ namespace Mos.xApi.Client
             response.EnsureSuccessStatusCode();
         }
 
+        /// <summary>
+        /// Parses the statement result and returns its object representation.
+        /// </summary>
+        /// <param name="response">The response received from the LRS</param>
+        /// <returns>The parsed statement result.</returns>
         private async Task<StatementResult> ParseStatementResultAsync(HttpResponseMessage response)
         {
             var data = await response.Content.ReadAsStringAsync();
@@ -321,6 +346,14 @@ namespace Mos.xApi.Client
             return statementResult;
         }
 
+        /// <summary>
+        /// Creates a State API query string from the passed parameters.
+        /// </summary>
+        /// <param name="stateId">The identifier of the State</param>
+        /// <param name="activityId">The identifier of the Activity this state is linked to</param>
+        /// <param name="agent">The agent of the Activity </param>
+        /// <param name="registration">The registration identifier.</param>
+        /// <returns></returns>
         private static string CreateStateQuery(string stateId, Uri activityId, Agent agent, Guid? registration)
         {
             var activityIdUrlEncoded = WebUtility.UrlEncode(activityId.ToString());

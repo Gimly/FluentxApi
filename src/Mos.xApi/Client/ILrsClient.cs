@@ -5,6 +5,9 @@ using Mos.xApi.Actors;
 
 namespace Mos.xApi.Client
 {
+    /// <summary>
+    /// Interface that defines all actions that can be made to a LRS client.
+    /// </summary>
     public interface ILrsClient
     {
         /// <summary>
