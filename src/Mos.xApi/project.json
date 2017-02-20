@@ -29,7 +29,7 @@
     "Microsoft.CodeAnalysis.FxCopAnalyzers": "1.1.0",
     "NETStandard.Library": "1.6.1",
     "Newtonsoft.Json": "9.0.1",
-    "System.ComponentModel.Annotations": "4.1.0",
+    "System.ComponentModel.Annotations": "4.3.0",
     "System.Reflection.TypeExtensions": "4.3.0",
     "System.Security.Cryptography.Algorithms": "4.3.0"
   },
