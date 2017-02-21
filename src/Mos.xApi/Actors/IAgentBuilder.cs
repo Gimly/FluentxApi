@@ -1,8 +1,8 @@
-﻿using System;
-
-namespace Mos.xApi.Actors
+﻿namespace Mos.xApi.Actors
 {
-    public interface IAgentBuilder : IActorBuilder<Agent>
-    {
-    }
+    /// <summary>
+    /// Interface that defines a builder used to simplify the creation of an Agent, 
+    /// in a fluent interface manner.
+    /// </summary>
+    public interface IAgentBuilder : IActorBuilder<Agent> { }
 }
