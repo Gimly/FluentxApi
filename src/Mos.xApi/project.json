@@ -1,6 +1,6 @@
 {
   "title": "Fluent xApi",
-  "version": "0.4.0-beta-*",
+  "version": "0.5.0-beta-*",
   "authors": [ "MindOnSite", "Xavier Hahn" ],
   "description": "A fluent .Net Standard library to create xApi statements and communicate with a LRS",
   "copyright": "Copyright © Mos MindOnSite",
@@ -13,7 +13,7 @@
     },
     "summary": "A fluent .Net Standard library to create xApi statements and communicate with a LRS",
     "projectUrl": "https://github.com/MindOnSite/FluentxApi/",
-    "authors": [ "Xavier Hahn" ],
+    "authors": [ "MindOnSite", "Xavier Hahn" ],
     "owners": [
       "Mos MindOnSite"
     ],
@@ -29,7 +29,7 @@
     "Microsoft.CodeAnalysis.FxCopAnalyzers": "1.1.0",
     "NETStandard.Library": "1.6.1",
     "Newtonsoft.Json": "9.0.1",
-    "System.ComponentModel.Annotations": "4.1.0",
+    "System.ComponentModel.Annotations": "4.3.0",
     "System.Reflection.TypeExtensions": "4.3.0",
     "System.Security.Cryptography.Algorithms": "4.3.0"
   },

@@ -1,11 +1,12 @@
 ﻿using Newtonsoft.Json;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace Mos.xApi.InverseFunctionalIdentifiers
 {
+    /// <summary>
+    /// Defines the identifier for an Actor that uses
+    /// an Account (a name and an homepage) as unique identification.
+    /// </summary>
     public class Account : IInverseFunctionalIdentifier
     {
         /// <summary>
