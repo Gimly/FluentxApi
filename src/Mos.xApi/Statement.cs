@@ -96,8 +96,15 @@ namespace Mos.xApi
         /// </summary>
         /// <param name="jsonString">The json representation of a statement.</param>
         /// <returns>The deserialized statement</returns>
-        public static Statement FromJson(string jsonString) => 
-            JsonConvert.DeserializeObject<Statement>(jsonString, JsonSerializerSettingsFactory.CreateSettings());
+        public static Statement FromJson(string jsonString)
+        {
+            if (string.IsNullOrWhiteSpace(jsonString))
+            {
+                throw new ArgumentNullException(nameof(jsonString));
+            }
+
+            return JsonConvert.DeserializeObject<Statement>(jsonString, JsonSerializerSettingsFactory.CreateSettings());
+        }
 
         /// <summary>
         /// Gets whom the Statement is about, as an Agent or Group Object.
