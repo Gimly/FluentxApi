@@ -22,20 +22,12 @@ namespace Mos.xApi.Client
         /// <summary>
         /// Singleton instanciated HttpClient
         /// </summary>
-        private static readonly HttpClient HttpClient;
+        private readonly HttpClient HttpClient;
 
         /// <summary>
         /// The endpoint (URL) for the statement API endpoint.
         /// </summary>
         private readonly string _statementEndPoint;
-
-        /// <summary>
-        /// Static initializer, instanciates the HttpClient.
-        /// </summary>
-        static LrsClient()
-        {
-            HttpClient = new HttpClient();
-        }
 
         /// <summary>
         /// Initializes a new instance of the LrsClient.
@@ -45,15 +37,13 @@ namespace Mos.xApi.Client
         /// <param name="xApiVersion">The version of xApi used.</param>
         public LrsClient(Uri lrsBaseUrl, string statementEndPoint = "statements", string xApiVersion = "1.0.0")
         {
-            HttpClient.BaseAddress = lrsBaseUrl;
-            _statementEndPoint = statementEndPoint;
-
-            if (HttpClient.DefaultRequestHeaders.Any(x => x.Key == "X-Experience-API-Version"))
+            HttpClient = new HttpClient()
             {
-                HttpClient.DefaultRequestHeaders.Remove("X-Experience-API-Version");
-            }
-
+                BaseAddress = lrsBaseUrl
+            };
             HttpClient.DefaultRequestHeaders.Add("X-Experience-API-Version", xApiVersion);
+
+            _statementEndPoint = statementEndPoint;
         }
 
         /// <summary>
@@ -123,7 +113,7 @@ namespace Mos.xApi.Client
             {
                 if (!response.IsSuccessStatusCode)
                 {
-                    if (response.StatusCode == System.Net.HttpStatusCode.NotFound)
+                    if (response.StatusCode == HttpStatusCode.NotFound)
                     {
                         return null;
                     }
