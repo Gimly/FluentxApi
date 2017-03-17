@@ -46,5 +46,16 @@ namespace Mos.xApi.Tests
             Assert.NotNull(exception.InnerException);
             Assert.IsType<JsonSerializationException>(exception.InnerException);
         }
+
+        [Fact]
+        public void FromJsonWithStatementJsonMissingVerbShouldThrowArgumentException()
+        {
+            var exception = Assert.Throws<ArgumentException>(
+                "jsonString",
+                () => Statement.FromJson("{\"actor\":{\"objectType\":\"Agent\",\"name\":\"xAPI mbox\",\"mbox\":\"mailto:xapi@adlnet.gov\"},\"object\":{\"objectType\":\"Activity\",\"id\":\"http://www.example.com/meetings/occurances/34534\"}}"));
+
+            Assert.NotNull(exception.InnerException);
+            Assert.IsType<JsonSerializationException>(exception.InnerException);
+        }
     }
 }
