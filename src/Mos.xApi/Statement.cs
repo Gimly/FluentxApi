@@ -97,7 +97,17 @@ namespace Mos.xApi
                 throw new ArgumentNullException(nameof(jsonString));
             }
 
-            return JsonConvert.DeserializeObject<Statement>(jsonString, JsonSerializerSettingsFactory.CreateSettings());
+            try
+            {
+                return JsonConvert.DeserializeObject<Statement>(jsonString, JsonSerializerSettingsFactory.CreateSettings());
+            }
+            catch (JsonReaderException ex)
+            {
+                throw new ArgumentException(
+                    "Unable to deserialize passed string, check inner exception for more details",
+                    nameof(jsonString),
+                    ex);
+            }
         }
 
         /// <summary>
