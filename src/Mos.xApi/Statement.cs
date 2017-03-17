@@ -68,19 +68,13 @@ namespace Mos.xApi
             IEnumerable<Attachment> attachments = null,
             Actor authority = null)
         {
-            if (statementObject == null)
-                throw new ArgumentNullException(nameof(statementObject));
-            if (verb == null)
-                throw new ArgumentNullException(nameof(verb));
-            if (actor == null)
-                throw new ArgumentNullException(nameof(actor));
+            Actor = actor ?? throw new ArgumentNullException(nameof(actor));
+            Verb = verb ?? throw new ArgumentNullException(nameof(verb));
+            StatementObject = statementObject ?? throw new ArgumentNullException(nameof(statementObject));
 
             Id = id;
             Context = context;
             Result = result;
-            Actor = actor;
-            Verb = verb;
-            StatementObject = statementObject;
 
             Timestamp = timestamp;
             Authority = authority;
