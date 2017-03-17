@@ -68,19 +68,13 @@ namespace Mos.xApi
             IEnumerable<Attachment> attachments = null,
             Actor authority = null)
         {
-            if (statementObject == null)
-                throw new ArgumentNullException(nameof(statementObject));
-            if (verb == null)
-                throw new ArgumentNullException(nameof(verb));
-            if (actor == null)
-                throw new ArgumentNullException(nameof(actor));
+            Actor = actor ?? throw new ArgumentNullException(nameof(actor));
+            Verb = verb ?? throw new ArgumentNullException(nameof(verb));
+            StatementObject = statementObject ?? throw new ArgumentNullException(nameof(statementObject));
 
             Id = id;
             Context = context;
             Result = result;
-            Actor = actor;
-            Verb = verb;
-            StatementObject = statementObject;
 
             Timestamp = timestamp;
             Authority = authority;
@@ -96,13 +90,37 @@ namespace Mos.xApi
         /// </summary>
         /// <param name="jsonString">The json representation of a statement.</param>
         /// <returns>The deserialized statement</returns>
-        public static Statement FromJson(string jsonString) => 
-            JsonConvert.DeserializeObject<Statement>(jsonString, JsonSerializerSettingsFactory.CreateSettings());
+        public static Statement FromJson(string jsonString)
+        {
+            if (string.IsNullOrWhiteSpace(jsonString))
+            {
+                throw new ArgumentNullException(nameof(jsonString));
+            }
+
+            try
+            {
+                return JsonConvert.DeserializeObject<Statement>(jsonString, JsonSerializerSettingsFactory.CreateSettings());
+            }
+            catch (JsonReaderException ex)
+            {
+                throw new ArgumentException(
+                    "Unable to deserialize passed string, check inner exception for more details",
+                    nameof(jsonString),
+                    ex);
+            }
+            catch (JsonSerializationException ex)
+            {
+                throw new ArgumentException(
+                    "The passed Json string is not a valid Statement. Please check inner exception for more details",
+                    nameof(jsonString),
+                    ex);
+            }
+        }
 
         /// <summary>
         /// Gets whom the Statement is about, as an Agent or Group Object.
         /// </summary>
-        [JsonProperty("actor", Order = 2)]
+        [JsonProperty("actor", Order = 2, Required = Required.Always)]
         public Actor Actor { get; private set; }
 
         /// <summary>
@@ -140,7 +158,7 @@ namespace Mos.xApi
         /// <summary>
         /// Gets an Activity, Agent, or another Statement that is the Object of the Statement.
         /// </summary>
-        [JsonProperty("object", Order = 4)]
+        [JsonProperty("object", Order = 4, Required = Required.Always)]
         public StatementObject StatementObject { get; private set; }
 
         /// <summary>
@@ -158,7 +176,7 @@ namespace Mos.xApi
         /// <summary>
         /// Gets the action taken by the Actor.
         /// </summary>
-        [JsonProperty("verb", Order = 3)]
+        [JsonProperty("verb", Order = 3, Required = Required.Always)]
         public Verb Verb { get; private set; }
 
         /// <summary>
