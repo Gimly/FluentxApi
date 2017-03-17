@@ -26,5 +26,14 @@ namespace Mos.xApi.Tests
             Assert.NotNull(exception.InnerException);
             Assert.IsType<JsonReaderException>(exception.InnerException);
         }
+
+        [Fact]
+        public void FromJsonWithNonStatementJsonShouldThrowArgumentException()
+        {
+            var exception = Assert.Throws<ArgumentException>("jsonString", () => Statement.FromJson("{\"hello\":\"world\"}"));
+
+            Assert.NotNull(exception.InnerException);
+            Assert.IsType<JsonSerializationException>(exception.InnerException);
+        }
     }
 }

@@ -108,12 +108,19 @@ namespace Mos.xApi
                     nameof(jsonString),
                     ex);
             }
+            catch (JsonSerializationException ex)
+            {
+                throw new ArgumentException(
+                    "The passed Json string is not a valid Statement. Please check inner exception for more details",
+                    nameof(jsonString),
+                    ex);
+            }
         }
 
         /// <summary>
         /// Gets whom the Statement is about, as an Agent or Group Object.
         /// </summary>
-        [JsonProperty("actor", Order = 2)]
+        [JsonProperty("actor", Order = 2, Required = Required.Always)]
         public Actor Actor { get; private set; }
 
         /// <summary>
@@ -151,7 +158,7 @@ namespace Mos.xApi
         /// <summary>
         /// Gets an Activity, Agent, or another Statement that is the Object of the Statement.
         /// </summary>
-        [JsonProperty("object", Order = 4)]
+        [JsonProperty("object", Order = 4, Required = Required.Always)]
         public StatementObject StatementObject { get; private set; }
 
         /// <summary>
@@ -169,7 +176,7 @@ namespace Mos.xApi
         /// <summary>
         /// Gets the action taken by the Actor.
         /// </summary>
-        [JsonProperty("verb", Order = 3)]
+        [JsonProperty("verb", Order = 3, Required = Required.Always)]
         public Verb Verb { get; private set; }
 
         /// <summary>
