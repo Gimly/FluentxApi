@@ -32,7 +32,7 @@ namespace Mos.xApi
 
             Id = id;
 
-            if (display != null || display.Any())
+            if (display != null && display.Any())
             {
                 Display = display;
             }
