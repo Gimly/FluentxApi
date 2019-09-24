@@ -1,4 +1,4 @@
-version: '{build}'
+version: '0.7.{build}'
 image: Visual Studio 2017
 pull_requests:  
   do_not_increment_build_number: true
@@ -7,8 +7,15 @@ branches:
   - master
 nuget:  
   disable_publish_on_pr: true
-build_script:  
-- ps: .\Build.ps1
+install:
+before_build:
+  # Display .NET Core version
+  - cmd: dotnet --version
+  # Display minimal restore text
+  - cmd: dotnet restore ./src/src.csproj --verbosity m
+build_script:
+  # output will be in ./src/bin/debug/netcoreapp1.1/publish
+  - cmd: dotnet publish ./src/src.csproj
 test: off
 artifacts:  
 - path: .\src\Mos.xApi\artifacts\*.nupkg
