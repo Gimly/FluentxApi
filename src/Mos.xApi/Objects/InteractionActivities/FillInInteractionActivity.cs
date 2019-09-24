@@ -22,7 +22,12 @@ namespace Mos.xApi.Objects.InteractionActivities
     /// </remarks>
     public class FillInInteractionActivity : IInteractionActivity<IEnumerable<IFillInResponseText>>
     {
-        public FillInInteractionActivity(bool isLong, IEnumerable<IFillInResponseText> correctResponse, bool caseMatters = false, bool orderMatters = true)
+        public FillInInteractionActivity(
+            bool isLong,
+            IEnumerable<IFillInResponseText> correctResponse,
+            bool caseMatters = false,
+            bool orderMatters = true,
+            string languageCode = "")
         {
             IsLong = isLong;
 
@@ -31,6 +36,7 @@ namespace Mos.xApi.Objects.InteractionActivities
 
             CaseMatters = caseMatters;
             OrderMatters = orderMatters;
+            LanguageCode = languageCode;
         }
 
         public bool CaseMatters { get; }

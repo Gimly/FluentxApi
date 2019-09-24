@@ -33,17 +33,17 @@ namespace Mos.xApi
         /// <summary>
         /// Gets the date and time when the document was most recently modified.
         /// </summary>
-        DateTime Updated { get; }
+        public DateTime Updated { get; }
 
         /// <summary>
         /// Gets the contents of the document.
         /// </summary>
-        byte[] Content { get; }
+        public byte[] Content { get; }
 
         /// <summary>
         /// Gets the content of the document decoded from the byte array through ASCII encoding.
         /// </summary>
-        string StringContent
+        public string StringContent
         {
             get
             {
