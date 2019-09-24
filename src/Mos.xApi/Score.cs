@@ -37,20 +37,20 @@ namespace Mos.xApi
 
             if (min.HasValue)
             {
-                if (raw.HasValue && raw.Value < min.Value)
-                {
-                    throw new ArgumentException("The value for raw must be greater than or equal to the value of min if min is specified.", nameof(raw));
-                }
-
                 if (max.HasValue && max.Value < min.Value)
                 {
                     throw new ArgumentException("The value for max must be higher than the value for min.", nameof(max));
                 }
             }
 
-            if (max.HasValue && raw.Value > max.Value)
+            if (raw.HasValue)
             {
-                if (raw.HasValue)
+                if (min.HasValue && raw.Value < min.Value)
+                {
+                    throw new ArgumentException("The value for raw must be greater than or equal to the value of min if min is specified.", nameof(raw));
+                }
+
+                if (max.HasValue && raw.Value > max.Value)
                 {
                     throw new ArgumentException("The value for raw must be smaller than or equal to the value of max if max is specified.", nameof(raw));
                 }
