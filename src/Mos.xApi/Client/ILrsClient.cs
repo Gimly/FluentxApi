@@ -19,7 +19,7 @@ namespace Mos.xApi.Client
         Task<StatementResult> FindMoreStatementsAsync(Uri moreStatementsUri);
 
         /// <summary>
-        /// Fetches all the statements corresponsing to the specified query.
+        /// Fetches all the statements corresponding to the specified query.
         /// </summary>
         /// <param name="query">The query defining the statements to retrieve</param>
         /// <returns>The list of all statements corresponding to the query.</returns>

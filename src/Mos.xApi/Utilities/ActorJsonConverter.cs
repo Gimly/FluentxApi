@@ -54,7 +54,7 @@ namespace Mos.xApi.Utilities
                 return ParseGroup(item);
             }
 
-            throw new InvalidOperationException($"Cannot parse Actor, unrecognized objectType.\r\n{item.ToString()}");
+            throw new InvalidOperationException($"Cannot parse Actor, unrecognized objectType.\r\n{item}");
         }
 
         /// <summary>
@@ -67,8 +67,14 @@ namespace Mos.xApi.Utilities
             var builder = Actor.CreateAgent(item["name"]?.Value<string>());
             if (item["mbox"] != null)
             {
-                // First 7 characters are the "mailto:", no need to keep it
-                return builder.WithMailBox(item["mbox"].Value<string>().Remove(0, 7));
+                var value = item["mbox"].Value<string>();
+                if (!value.StartsWith(EmailJsonConverter.MailToPrefix))
+                {
+                    throw new NotSupportedException($"mbox value must start with '{EmailJsonConverter.MailToPrefix}' prefix.");
+                }
+
+                var email = value.Substring(EmailJsonConverter.MailToPrefix.Length);
+                return builder.WithMailBox(email);
             }
 
             if (item["openid"] != null)

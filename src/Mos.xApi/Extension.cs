@@ -31,7 +31,7 @@ namespace Mos.xApi
         }
 
         /// <summary>
-        /// Initializes a new instance of the Extension disctionary which is empty.
+        /// Initializes a new instance of the Extension dictionary which is empty.
         /// </summary>
         public Extension() { }
     }

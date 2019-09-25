@@ -41,7 +41,7 @@ namespace Mos.xApi
         /// <summary>
         /// Initializes a new instance of the <see cref="Verb"/> class with an IRI as an identifier and display information.
         /// </summary>
-        /// <remarks>While not mandatory, it should be prefered to pass the display.</remarks>
+        /// <remarks>While not mandatory, it should be preferred to pass the display.</remarks>
         /// <param name="id">IRI that corresponds to a Verb definition.</param>
         public Verb(Uri id) : this(id, null) { }
 

@@ -25,7 +25,7 @@ namespace Mos.xApi.Builders
         /// <summary>
         /// Whom the Statement is about, as an Agent or Group Object.
         /// </summary>
-        private Actor _actor;
+        private readonly Actor _actor;
 
         /// <summary>
         /// Agent or Group who is asserting this Statement is true. 
@@ -45,7 +45,7 @@ namespace Mos.xApi.Builders
         /// <summary>
         /// Activity, Agent, or another Statement that is the Object of the Statement.
         /// </summary>
-        private StatementObject _statementObject;
+        private readonly StatementObject _statementObject;
 
         /// <summary>
         /// Timestamp of when the events described within this Statement occurred.
@@ -55,7 +55,7 @@ namespace Mos.xApi.Builders
         /// <summary>
         /// Action taken by the Actor.
         /// </summary>
-        private Verb _verb;
+        private readonly Verb _verb;
 
         /// <summary>
         /// Initializes a new instance of a StatementBuilder class.

@@ -9,7 +9,7 @@ namespace Mos.xApi
     public class LanguageMap : Dictionary<string, string>, ILanguageMap
     {
         /// <summary>
-        /// Initializes a new instance of the LanguageMap disctionary which is empty.
+        /// Initializes a new instance of the LanguageMap dictionary which is empty.
         /// </summary>
         public LanguageMap() { }
 

@@ -12,7 +12,7 @@ namespace Mos.xApi.Actors
     public class Group : Actor
     {
         /// <summary>
-        /// Initializes a new intance of <see cref="Group"/>. This constructor call creates an anonymous group.
+        /// Initializes a new instance of <see cref="Group"/>. This constructor call creates an anonymous group.
         /// <para>An Anonymous Group is used describe a cluster of people where there is no ready identifier for this cluster, e.g. an ad hoc team.</para>
         /// </summary>
         /// <param name="members">The members of this Group. This is an unordered list.</param>
@@ -26,7 +26,7 @@ namespace Mos.xApi.Actors
         }
 
         /// <summary>
-        /// Initializes a new intance of <see cref="Group"/>. This constructor call creates an identified group.
+        /// Initializes a new instance of <see cref="Group"/>. This constructor call creates an identified group.
         /// <para>An Identified Group is used to uniquely identify a cluster of Agents.</para>
         /// </summary>
         /// <param name="identifier">An Inverse Functional Identifier unique to the Group.</param>
