@@ -24,12 +24,12 @@ namespace Mos.xApi.Objects
         /// <summary>
         /// A description of the Activity
         /// </summary>
-        private LanguageMap _descriptionLanguageMap;
+        private readonly LanguageMap _descriptionLanguageMap;
 
         /// <summary>
         /// A map of other properties as needed
         /// </summary>
-        private Extension _extensions;
+        private readonly Extension _extensions;
 
         /// <summary>
         /// Resolves to a document with human-readable information about the Activity, which could include a way to launch the activity.
@@ -39,7 +39,7 @@ namespace Mos.xApi.Objects
         /// <summary>
         /// The human readable/visual name of the Activity
         /// </summary>
-        private LanguageMap _nameLanguageMap;
+        private readonly LanguageMap _nameLanguageMap;
 
         /// <summary>
         /// Initializes a new instance of the ActivityBuilder class.

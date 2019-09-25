@@ -138,7 +138,7 @@ namespace Mos.xApi.Builders
         /// <summary>
         /// Sets the platform used in the experience of this learning activity.
         /// </summary>
-        /// <param name="platform">The plateform used in the experience of this learning activity.</param>
+        /// <param name="platform">The platform used in the experience of this learning activity.</param>
         /// <returns>The builder class, for the fluent API.</returns>
         IContextBuilder WithPlatform(string platform);
 

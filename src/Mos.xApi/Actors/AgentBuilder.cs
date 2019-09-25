@@ -11,7 +11,7 @@ namespace Mos.xApi.Actors
         /// <summary>
         /// The full name of the Agent.
         /// </summary>
-        private string _name;
+        private readonly string _name;
 
         /// <summary>
         /// Initializes a new instance of an Agent class.

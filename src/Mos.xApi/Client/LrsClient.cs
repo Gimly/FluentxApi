@@ -20,7 +20,7 @@ namespace Mos.xApi.Client
     public class LrsClient : ILrsClient
     {
         /// <summary>
-        /// Singleton instanciated HttpClient
+        /// Singleton instantiated HttpClient
         /// </summary>
         private readonly HttpClient HttpClient;
 
@@ -37,7 +37,7 @@ namespace Mos.xApi.Client
         /// <param name="xApiVersion">The version of xApi used.</param>
         public LrsClient(Uri lrsBaseUrl, string statementEndPoint = "statements", string xApiVersion = "1.0.0")
         {
-            HttpClient = new HttpClient()
+            HttpClient = new HttpClient
             {
                 BaseAddress = lrsBaseUrl
             };
@@ -127,7 +127,7 @@ namespace Mos.xApi.Client
         }
 
         /// <summary>
-        /// Fetches all the statements corresponsing to the specified query.
+        /// Fetches all the statements corresponding to the specified query.
         /// </summary>
         /// <param name="query">The query defining the statements to retrieve</param>
         /// <returns>The list of all statements corresponding to the query.</returns>

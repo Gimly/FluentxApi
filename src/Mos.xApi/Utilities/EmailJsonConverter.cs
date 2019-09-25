@@ -11,6 +11,8 @@ namespace Mos.xApi.Utilities
     /// </summary>
     internal class EmailJsonConverter : JsonConverter
     {
+        internal const string MailToPrefix = "mailto:";
+
         /// <summary>
         /// Checks whether the type can be converted by this converter. Type should be a string.
         /// </summary>
@@ -56,7 +58,7 @@ namespace Mos.xApi.Utilities
                 throw new NotSupportedException($"{rawValue} is not a valid e-mail address.");
             }
 
-            writer.WriteValue($"mailto:{rawValue}");
+            writer.WriteValue($"{MailToPrefix}{rawValue}");
         }
     }
 }

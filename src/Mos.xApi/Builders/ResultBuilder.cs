@@ -20,7 +20,7 @@ namespace Mos.xApi.Builders
         /// <summary>
         /// A map of other properties as needed.
         /// </summary>
-        private Extension _extensions;
+        private readonly Extension _extensions;
 
         /// <summary>
         /// A response appropriately formatted for the given Activity.

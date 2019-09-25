@@ -12,7 +12,7 @@ namespace Mos.xApi.Client
         /// <summary>
         /// The list of statements returned from the query.
         /// </summary>
-        private List<Statement> _statements;
+        private readonly List<Statement> _statements;
 
         /// <summary>
         /// Initializes a new instance of a StatementResult class.

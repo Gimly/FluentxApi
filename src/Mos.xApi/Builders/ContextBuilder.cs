@@ -14,17 +14,17 @@ namespace Mos.xApi.Builders
         /// <summary>
         /// List of activities that are used to categorize a Statement
         /// </summary>
-        private List<Activity> _categories;
+        private readonly List<Activity> _categories;
 
         /// <summary>
         /// The list of extensions available to the Context
         /// </summary>
-        private Extension _extensions;
+        private readonly Extension _extensions;
 
         /// <summary>
         /// A list of activities with an indirect relation to the Activity which is the Object of the Statement.
         /// </summary>
-        private List<Activity> _groupings;
+        private readonly List<Activity> _groupings;
 
         /// <summary>
         /// Instructor that the Statement relates to, if not included as the Actor of the Statement.
@@ -39,12 +39,12 @@ namespace Mos.xApi.Builders
         /// <summary>
         /// A list of context Activities that doesn't fit one of the other properties
         /// </summary>
-        private List<Activity> _others;
+        private readonly List<Activity> _others;
 
         /// <summary>
         /// A list of activities with a direct relation to the Activity which is the Object of the Statement.
         /// </summary>
-        private List<Activity> _parents;
+        private readonly List<Activity> _parents;
 
         /// <summary>
         /// Platform used in the experience of this learning activity.
@@ -316,7 +316,7 @@ namespace Mos.xApi.Builders
         /// <summary>
         /// Sets the platform used in the experience of this learning activity.
         /// </summary>
-        /// <param name="platform">The plateform used in the experience of this learning activity.</param>
+        /// <param name="platform">The platform used in the experience of this learning activity.</param>
         /// <returns>The builder class, for the fluent API.</returns>
         public IContextBuilder WithPlatform(string platform)
         {

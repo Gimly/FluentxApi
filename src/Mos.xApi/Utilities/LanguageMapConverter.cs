@@ -38,7 +38,7 @@ namespace Mos.xApi.Utilities
         /// from this.
         /// </summary>
         /// <param name="reader">The JsonReader to read from.</param>
-        /// <param name="objectType">Type of the object.</param>
+        /// <parae="objectType">Type of the object.</param>
         /// <param name="existingValue">The existing value of object being read.</param>
         /// <param name="serializer">The calling serializer.</param>
         /// <returns>The object value.</returns>

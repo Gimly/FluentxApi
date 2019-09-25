@@ -13,7 +13,7 @@ namespace Mos.xApi.Objects
         /// <summary>
         /// Whom the SubStatement is about, as an Agent or Group Object.
         /// </summary>
-        private Actor _actor;
+        private readonly Actor _actor;
 
         /// <summary>
         /// Headers for Attachments to the SubStatement
@@ -33,7 +33,7 @@ namespace Mos.xApi.Objects
         /// <summary>
         /// Activity or Agent that is the Object of the SubStatement.
         /// </summary>
-        private StatementObject _statementObject;
+        private readonly StatementObject _statementObject;
 
         /// <summary>
         /// Timestamp of when the events described within this SubStatement occurred. Set by the LRS if not provided.
@@ -43,7 +43,7 @@ namespace Mos.xApi.Objects
         /// <summary>
         /// Action taken by the Actor.
         /// </summary>
-        private Verb _verb;
+        private readonly Verb _verb;
 
         /// <summary>
         /// Initializes a new instance of the SubStatementBuilder class, passing the

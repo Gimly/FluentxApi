@@ -39,7 +39,7 @@ namespace Mos.xApi.InverseFunctionalIdentifiers
 
             if (!homePage.IsWellFormedOriginalString())
             {
-                throw new ArgumentException($"Homepage uri is malformed: {homePage.ToString()}", nameof(homePage));
+                throw new ArgumentException($"Homepage uri is malformed: {homePage}", nameof(homePage));
             }
 
             Name = name;
