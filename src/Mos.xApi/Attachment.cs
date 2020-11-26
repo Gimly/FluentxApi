@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 
 namespace Mos.xApi
 {
@@ -40,36 +41,43 @@ namespace Mos.xApi
         /// <summary>
         /// Gets the unique identifier that identifies the usage of this Attachment. For example: one expected use case for Attachments is to include a "completion certificate".<para>An IRI corresponding to this usage MUST be coined, and used with completion certificate attachments.</para>
         /// </summary>
+        [JsonProperty("usageType", Order = 0, NullValueHandling = NullValueHandling.Ignore)]
         public Uri UsageType { get; }
 
         /// <summary>
         /// Gets the display name (title) of this Attachment.
         /// </summary>
+        [JsonProperty("display", Order = 1, NullValueHandling = NullValueHandling.Ignore)]
         public ILanguageMap Display { get; }
 
         /// <summary>
         /// Gets the content type of the Attachment.
         /// </summary>
+        [JsonProperty("contentType", Order = 2, NullValueHandling = NullValueHandling.Ignore)]
         public string ContentType { get; }
 
         /// <summary>
         /// Gets the length of the Attachment data in octets.
         /// </summary>
+        [JsonProperty("length", Order = 3, NullValueHandling = NullValueHandling.Ignore)]
         public int Length { get; }
 
         /// <summary>
         /// Gets the SHA-2 hash of the Attachment data. This property is always required, even if fileURL is also specified.
         /// </summary>
+        [JsonProperty("sha2", Order = 4, NullValueHandling = NullValueHandling.Ignore)]
         public string Sha2 { get; }
 
         /// <summary>
         /// Gets a description of the Attachment
         /// </summary>
+        [JsonProperty("description", Order = 5, NullValueHandling = NullValueHandling.Ignore)]
         public ILanguageMap Description { get; }
 
         /// <summary>
         /// Gets an IRL at which the Attachment data can be retrieved, or from which it used to be retrievable.
         /// </summary>
+        [JsonProperty("fileUrl", Order = 6, NullValueHandling = NullValueHandling.Ignore)]
         public Uri FileUrl { get; }
     }
 }
