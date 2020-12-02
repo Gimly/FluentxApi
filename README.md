@@ -1,7 +1,7 @@
 # FluentxApi
 A fluent .Net Standard library to create xApi statements and communicate with a LRS
 
-[![Build status](https://ci.appveyor.com/api/projects/status/d0mf3u2hl448pjys/branch/master?svg=true)](https://ci.appveyor.com/project/Gimly/fluentxapi/branch/master)
+![.NET Core](https://github.com/MindOnSite/FluentxApi/workflows/.NET%20Core/badge.svg)
 [![MyGet CI](https://img.shields.io/myget/mindonsite/v/Mos.xApi.svg)](https://www.myget.org/feed/mindonsite/package/nuget/Mos.xApi)
 [![NuGet](https://img.shields.io/nuget/v/Mos.xApi.svg)](https://www.nuget.org/packages/Mos.xApi)
 
