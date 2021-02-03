@@ -328,7 +328,7 @@ namespace Mos.xApi.Client
                 }
             }
 
-            if (result["more"] != null)
+            if (result["more"] != null && !string.IsNullOrWhiteSpace(result["more"].Value<string>()))
             {
                 statementResult.More = new Uri(result["more"].Value<string>());
             }
