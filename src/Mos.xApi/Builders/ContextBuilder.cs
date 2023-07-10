@@ -262,7 +262,7 @@ namespace Mos.xApi.Builders
         /// <returns>The builder class, for the fluent API.</returns>
         public IContextBuilder AddParents(IEnumerable<Activity> activities)
         {
-            _parents.AddRange(_parents);
+            _parents.AddRange(activities);
             return this;
         }
 
