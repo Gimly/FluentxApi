@@ -86,15 +86,3 @@ You can add bugs or feature requests by [creating a new item](https://github.com
 This project uses the following open source components
 
 - [Newtonsoft.Json](https://github.com/JamesNK/Newtonsoft.Json/blob/master/LICENSE.md)
-
-## Mos MindOnSite
-
-This project is brought to you by [MOS MindOnSite](http://www.mindonsite.com/en/) _Smart learning solutions_.
-
-We assist you in implementing your fully customised learning environment, with innovative and smart solutions and ready-to-use and custom-made portals.
-
-We create a digital and unified learning experience that fits you best and where you decide the objectives and the degree of customisation.
-
-With our solutions, you inform, train, follow, evaluate and certify your ecosystem: employees, external partners, distributors, resellers and clients.
-
-Take a look at our [solutions](http://www.mindonsite.com/en/our-solutions/) and our [offer](http://www.mindonsite.com/en/our-offer/).
